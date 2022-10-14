@@ -1,0 +1,47 @@
+﻿@model IEnumerable<online_store.Models.tblstock>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Stock</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+         Name
+        </th>
+        <th>
+            Supllier Name
+        </th>
+        <th>
+           Qty
+        </th>
+        <th>
+            Date
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.tblproduct.name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tblsupplier.sname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.qty)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.expirary_date)
+    </td>
+
+    
+</tr>
+}
+
+</table>

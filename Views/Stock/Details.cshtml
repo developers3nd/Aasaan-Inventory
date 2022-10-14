@@ -1,0 +1,50 @@
+﻿@model online_store.Models.tblstock
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.qty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.qty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.expirary_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.expirary_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblproduct.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblproduct.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblsupplier.sname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblsupplier.sname)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.stockid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

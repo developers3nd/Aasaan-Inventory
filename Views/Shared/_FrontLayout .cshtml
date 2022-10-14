@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>A & H ZUPER MART</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="A & H ZUPER MART" />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta tag Keywords -->
+    <!-- Custom-Files -->
+    <link rel="stylesheet" href="~/FrontTheme/css/bootstrap.css">
+    <!-- Bootstrap-Core-CSS -->
+    <link rel="stylesheet" href="~/FrontTheme/css/style.css" type="text/css" media="all" />
+    <!-- Style-CSS -->
+    <!-- font-awesome-icons -->
+    <link href="~/FrontTheme/css/font-awesome.css" rel="stylesheet">
+    <!-- //font-awesome-icons -->
+    <!-- /Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Hind:300,400,500,600,700" rel="stylesheet">
+    <link href="~/css/StyleSheet1.css">
+    <!-- //Fonts -->
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="~/dist/img/ms-icon-310x310.png">
+
+
+    
+
+
+</head>
+
+<body>
+    <div class="main-sec">
+        <!-- //header -->
+        <header class="py-sm-3 pt-3 pb-2" id="home">
+            <div class="container">
+                <!-- nav -->
+                <div class="top-w3pvt d-flex">
+                    <div id="logo">
+                        <a href="@Url.Action("Index", "Home")">  <img src="~/dist/img/credit/ShopCheck__1_-removebg-preview.png" alt="User Avatar" style="width:150px;" class="img"></a>
+                    </div>
+
+
+                </div>
+                <div class="nav-top-wthree">
+                    <nav>
+                        <label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
+                        <input type="checkbox" id="drop">
+                        <ul class="menu">
+                            <li class="active"><a href="@Url.Action("Index", "Home")">Home</a></li>
+
+                            <li>
+                                <a href="@Url.Action("back", "Home")">Products</a>
+                            </li>
+
+
+                            <li><a href="@Url.Action("Login","Accounts")">Login</a></li>
+                        </ul>
+                    </nav>
+                    <!-- //nav -->
+                    <div class="search-form ml-auto">
+                        <div class="form-w3layouts-grid">
+                            <form action="#" method="post" class="newsletter">
+                                <input class="search" type="search" id="txtsearch" placeholder="Search here..." required="">
+                                <button class="form-control btn" value=""><span class="fa fa-search"></span></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </header>
+        <!-- //header -->
+        <!--/banner-->
+        <div class="banner-wthree-info container">
+            <div class="row">
+                <div class="col-lg-5 banner-left-info">
+                    <h3>The Largest Range <span>Of Online Shoping</span></h3>
+                    <a href="@Url.Action("back", "Home")" class="btn shop">Shop Now</a>
+                </div>
+
+                <div class="col-lg-7 banner-img">
+                    <img src="~/FrontTheme/images/68786969_109147210446543_2752336148469645312_n-removebg-preview.png" alt="part image" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="banner-bottom py-5">
+        <h1 style="text-align:center;">Delivery Modes    </h1>
+        <div class="container py-md-3" >
+            <div class="row grids-wthree-info text-center">
+                <div class="col-lg-4 ab-content">
+                    <div class="ab-info-con">
+                        <img style="width:200px; height:200px;" src="~/FrontTheme/images/fast-delivery (1).png" alt="Card image cap" >
+
+                        <h4>Fast &amp; Free Delivery</h4>
+                        <p>Lorem ipsum dolor sit,Nulla pellentesque dolor ipsum laoreet eleifend integer,Pellentesque maximus libero.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 ab-content">
+                    <div class="ab-info-con">
+                        <img style="width:200px; height:200px;" src="~/FrontTheme/images/secure-payment.png" alt="Card image cap">
+
+                        <h4>Safe &amp; Secure Payments</h4>
+                        <p>Lorem ipsum dolor sit,Nulla pellentesque dolor ipsum laoreet eleifend integer,Pellentesque maximus libero.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 ab-content">
+                    <div class="ab-info-con">
+                        <img  style="width:200px; height:200px;" src="~/FrontTheme/images/salary.png" alt="Card image cap">
+
+                        <h4>100% Money Back Guarantee</h4>
+                        <p>Lorem ipsum dolor sit,Nulla pellentesque dolor ipsum laoreet eleifend integer,Pellentesque maximus libero.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+
+
+    <section class="shipping-wthree">
+        <div class="shiopping-grids d-lg-flex">
+            <div class="col-lg-4 shiopping-w3pvt-gd text-center">
+                <div class="icon-gd">
+                    <span class="fa fa-truck" aria-hidden="true"></span>
+                </div>
+                <div class="icon-gd-info">
+                    <h3>FREE SHIPPING</h3>
+                    <p>On all order over $2000</p>
+                </div>
+            </div>
+            <div class="col-lg-4 shiopping-w3pvt-gd sec text-center">
+                <div class="icon-gd"><span class="fa fa-bullhorn" aria-hidden="true"></span></div>
+                <div class="icon-gd-info">
+                    <h3>FREE RETURN</h3>
+                    <p>On 1st exchange in 30 days</p>
+                </div>
+            </div>
+            <div class="col-lg-4 shiopping-w3pvt-gd text-center">
+                <div class="icon-gd"> <span class="fa fa-gift" aria-hidden="true"></span></div>
+                <div class="icon-gd-info">
+                    <h3>MEMBER DISCOUNT</h3>
+                    <p>Register &amp; save up to $29%</p>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+
+
+    <div class="footer_agileinfo_topf py-5">
+        <div class="container py-md-5">
+            
+
+            <div class="w3ls-fsocial-grid">
+                <h3 class="sub-w3ls-headf">Follow Us</h3>
+                <div class="social-ficons">
+                    <ul>
+                        <li><a href="#"><span class="fa fa-facebook"></span> Facebook</a></li>
+                        <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
+                        <li><a href="#"><span class="fa fa-google"></span>Google</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="move-top text-center mt-lg-4 mt-3">
+                <a href="#home"><span class="fa fa-angle-double-up" aria-hidden="true"></span></a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="cpy-right text-center py-3">
+        <p>
+            © 2022 A & H ZUPER MART| All rights reserved
+
+        </p>
+
+    </div>
+    <!-- //copyright -->
+
+</body>
+
+</html>

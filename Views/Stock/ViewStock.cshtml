@@ -1,0 +1,63 @@
+﻿@model IEnumerable<online_store.Models.tblstock>
+
+@{
+    ViewBag.Title = "ViewStock";
+}
+
+<h2>ViewStock</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            Items
+        </th>
+        <th>
+            Categories
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            Supplier
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.tblproduct.name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tblcategory.catname)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.qty)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.date)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.tblsupplier.sname)
+    </td>
+
+</tr>
+}
+
+</table>

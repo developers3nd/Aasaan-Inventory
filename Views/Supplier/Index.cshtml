@@ -1,0 +1,54 @@
+﻿@model IEnumerable<online_store.Models.tblsupplier>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<p>
+    <a href="@Url.Action("Create","Supplier")" class="btn btn-info"> Add New Supplier</a>
+</p>
+
+<h2>View Supplier</h2>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Supplier Name
+        </th>
+        <th>
+           Contact
+        </th>
+        <th>
+            Adress
+        </th>
+        <th>
+            Status
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.sname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.contact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit","Supplier",new { id = @item.sid})" class="btn btn-info"> Edit</a>
+                <a href="@Url.Action("Delete","Supplier",new { id = @item.sid})" class="btn btn-danger"> Delete</a>
+
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbonlinestoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblcategories">
+    <Key>
+      <PropertyRef Name="catid" />
+    </Key>
+    <Property Name="catid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="catname" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblcompany">
+    <Key>
+      <PropertyRef Name="cid" />
+    </Key>
+    <Property Name="cid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cname" Type="varchar" MaxLength="50" />
+    <Property Name="contact" Type="int" />
+    <Property Name="adress" Type="varchar" MaxLength="50" />
+    <Property Name="cimage" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="tblorder">
+    <Key>
+      <PropertyRef Name="orderid" />
+    </Key>
+    <Property Name="orderid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customername" Type="varchar" MaxLength="50" />
+    <Property Name="qty" Type="int" />
+    <Property Name="total" Type="int" />
+    <Property Name="status" Type="int" />
+    <Property Name="pid" Type="int" />
+    <Property Name="date" Type="date" />
+  </EntityType>
+  <EntityType Name="tblproducts">
+    <Key>
+      <PropertyRef Name="pid" />
+    </Key>
+    <Property Name="pid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="price" Type="int" />
+    <Property Name="qty" Type="int" />
+    <Property Name="pimage" Type="varchar" MaxLength="1000" />
+    <Property Name="catid" Type="int" />
+    <Property Name="itemcode" Type="int" />
+  </EntityType>
+  <EntityType Name="tblstock">
+    <Key>
+      <PropertyRef Name="stockid" />
+    </Key>
+    <Property Name="stockid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pid" Type="int" />
+    <Property Name="sid" Type="int" />
+    <Property Name="qty" Type="int" />
+    <Property Name="expirary_date" Type="date" />
+  </EntityType>
+  <EntityType Name="tblsupplier">
+    <Key>
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sname" Type="varchar" MaxLength="50" />
+    <Property Name="contact" Type="int" />
+    <Property Name="adress" Type="varchar" MaxLength="50" />
+    <Property Name="status" Type="int" />
+  </EntityType>
+  <EntityType Name="tbluser">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="userid" Type="int" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="Roleid" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'D:\ONLINE STORE WEBAPP\ONLINE STORE\APP_DATA\DBONLINESTORE.MDF.dbo.myinvoice' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="myinvoice">
+    <Key>
+      <PropertyRef Name="orderid" />
+    </Key>
+    <Property Name="orderid" Type="int" Nullable="false" />
+    <Property Name="catname" Type="varchar" MaxLength="50" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="price" Type="int" />
+    <Property Name="customername" Type="varchar" MaxLength="50" />
+    <Property Name="qty" Type="int" />
+    <Property Name="total" Type="int" />
+    <Property Name="date" Type="date" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'D:\ONLINE STORE WEBAPP\ONLINE STORE\APP_DATA\DBONLINESTORE.MDF.dbo.stock_items' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="stock_items">
+    <Key>
+      <PropertyRef Name="stockid" />
+    </Key>
+    <Property Name="stockid" Type="int" Nullable="false" />
+    <Property Name="pid" Type="int" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="price" Type="int" />
+  </EntityType>
+  <Association Name="FK_tblproducts_Totblproduct">
+    <End Role="tblcategories" Type="Self.tblcategories" Multiplicity="0..1" />
+    <End Role="tblproducts" Type="Self.tblproducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblcategories">
+        <PropertyRef Name="catid" />
+      </Principal>
+      <Dependent Role="tblproducts">
+        <PropertyRef Name="catid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblstock_Totblproducts">
+    <End Role="tblproducts" Type="Self.tblproducts" Multiplicity="0..1" />
+    <End Role="tblstock" Type="Self.tblstock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblproducts">
+        <PropertyRef Name="pid" />
+      </Principal>
+      <Dependent Role="tblstock">
+        <PropertyRef Name="pid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblstock_Totblsupplier">
+    <End Role="tblsupplier" Type="Self.tblsupplier" Multiplicity="0..1" />
+    <End Role="tblstock" Type="Self.tblstock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblsupplier">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="tblstock">
+        <PropertyRef Name="sid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbonlinestoreModelStoreContainer">
+    <EntitySet Name="tblcategories" EntityType="Self.tblcategories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblcompany" EntityType="Self.tblcompany" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblorder" EntityType="Self.tblorder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblproducts" EntityType="Self.tblproducts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblstock" EntityType="Self.tblstock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblsupplier" EntityType="Self.tblsupplier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbluser" EntityType="Self.tbluser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="myinvoice" EntityType="Self.myinvoice" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [myinvoice].[orderid] AS [orderid], 
+    [myinvoice].[catname] AS [catname], 
+    [myinvoice].[name] AS [name], 
+    [myinvoice].[price] AS [price], 
+    [myinvoice].[customername] AS [customername], 
+    [myinvoice].[qty] AS [qty], 
+    [myinvoice].[total] AS [total], 
+    [myinvoice].[date] AS [date]
+    FROM [dbo].[myinvoice] AS [myinvoice]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="stock_items" EntityType="Self.stock_items" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [stock_items].[stockid] AS [stockid], 
+    [stock_items].[pid] AS [pid], 
+    [stock_items].[name] AS [name], 
+    [stock_items].[price] AS [price]
+    FROM [dbo].[stock_items] AS [stock_items]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_tblproducts_Totblproduct" Association="Self.FK_tblproducts_Totblproduct">
+      <End Role="tblcategories" EntitySet="tblcategories" />
+      <End Role="tblproducts" EntitySet="tblproducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblstock_Totblproducts" Association="Self.FK_tblstock_Totblproducts">
+      <End Role="tblproducts" EntitySet="tblproducts" />
+      <End Role="tblstock" EntitySet="tblstock" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblstock_Totblsupplier" Association="Self.FK_tblstock_Totblsupplier">
+      <End Role="tblsupplier" EntitySet="tblsupplier" />
+      <End Role="tblstock" EntitySet="tblstock" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

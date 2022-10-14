@@ -1,0 +1,56 @@
+﻿@model online_store.Models.tblstock
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tblstock</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.qty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.qty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.expirary_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.expirary_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblproduct.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblproduct.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblsupplier.sname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblsupplier.sname)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

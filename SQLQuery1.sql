@@ -1,0 +1,1 @@
+﻿select * from tblproducts where itemcode =1471616086

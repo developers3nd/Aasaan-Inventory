@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbonlinestoreModelStoreContainer" CdmEntityContainer="dbonlinestoreEntities">
+    <EntitySetMapping Name="tblcategories">
+      <EntityTypeMapping TypeName="dbonlinestoreModel.tblcategory">
+        <MappingFragment StoreEntitySet="tblcategories">
+          <ScalarProperty Name="catname" ColumnName="catname" />
+          <ScalarProperty Name="catid" ColumnName="catid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblorders">
+      <EntityTypeMapping TypeName="dbonlinestoreModel.tblorder">
+        <MappingFragment StoreEntitySet="tblorder">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="pid" ColumnName="pid" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+          <ScalarProperty Name="customername" ColumnName="customername" />
+          <ScalarProperty Name="orderid" ColumnName="orderid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblusers">
+      <EntityTypeMapping TypeName="dbonlinestoreModel.tbluser">
+        <MappingFragment StoreEntitySet="tbluser">
+          <ScalarProperty Name="Roleid" ColumnName="Roleid" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblsuppliers">
+      <EntityTypeMapping TypeName="dbonlinestoreModel.tblsupplier">
+        <MappingFragment StoreEntitySet="tblsupplier">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="adress" ColumnName="adress" />
+          <ScalarProperty Name="contact" ColumnName="contact" />
+          <ScalarProperty Name="sname" ColumnName="sname" />
+          <ScalarProperty Name="sid" ColumnName="sid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblcompanies">
+      <EntityTypeMapping TypeName="dbonlinestoreModel.tblcompany">
+        <MappingFragment StoreEntitySet="tblcompany">
+          <ScalarProperty Name="cimage" ColumnName="cimage" />
+          <ScalarProperty Name="adress" ColumnName="adress" />
+          <ScalarProperty Name="contact" ColumnName="contact" />
+          <ScalarProperty Name="cname" ColumnName="cname" />
+          <ScalarProperty Name="cid" ColumnName="cid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblproducts">
+      <EntityTypeMapping TypeName="dbonlinestoreModel.tblproduct">
+        <MappingFragment StoreEntitySet="tblproducts">
+          <ScalarProperty Name="itemcode" ColumnName="itemcode" />
+          <ScalarProperty Name="catid" ColumnName="catid" />
+          <ScalarProperty Name="pimage" ColumnName="pimage" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="pid" ColumnName="pid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblstocks">
+      <EntityTypeMapping TypeName="dbonlinestoreModel.tblstock">
+        <MappingFragment StoreEntitySet="tblstock">
+          <ScalarProperty Name="expirary_date" ColumnName="expirary_date" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+          <ScalarProperty Name="sid" ColumnName="sid" />
+          <ScalarProperty Name="pid" ColumnName="pid" />
+          <ScalarProperty Name="stockid" ColumnName="stockid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stock_items">
+      <EntityTypeMapping TypeName="dbonlinestoreModel.stock_items">
+        <MappingFragment StoreEntitySet="stock_items">
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="pid" ColumnName="pid" />
+          <ScalarProperty Name="stockid" ColumnName="stockid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="myinvoices">
+      <EntityTypeMapping TypeName="dbonlinestoreModel.myinvoice">
+        <MappingFragment StoreEntitySet="myinvoice">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+          <ScalarProperty Name="customername" ColumnName="customername" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="catname" ColumnName="catname" />
+          <ScalarProperty Name="orderid" ColumnName="orderid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

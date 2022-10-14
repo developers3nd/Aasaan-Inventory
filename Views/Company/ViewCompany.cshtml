@@ -1,0 +1,48 @@
+﻿@model IEnumerable<online_store.Models.tblcompany>
+
+@{
+    ViewBag.Title = "ViewCompany";
+}
+
+<h2>View Company</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+           Company
+        </th>
+        <th>
+           Contact
+        </th>
+        <th>
+           Address
+        </th>
+        <th>
+           Logo
+        </th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.cname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.contact)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.adress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cimage)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit","Company", new { cid  = item.cid })" class="btn btn-info"> Edit </a>
+            <a href="@Url.Action("Delete","Company", new { cid  = item.cid })" class="btn btn-danger"> Delete </a>
+        </td>
+    </tr>
+}
+
+</table>

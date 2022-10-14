@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbonlinestoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="dbonlinestoreEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblcategories" EntityType="dbonlinestoreModel.tblcategory" />
+    <EntitySet Name="tblorders" EntityType="dbonlinestoreModel.tblorder" />
+    <EntitySet Name="tblusers" EntityType="dbonlinestoreModel.tbluser" />
+    <EntitySet Name="tblsuppliers" EntityType="dbonlinestoreModel.tblsupplier" />
+    <EntitySet Name="tblcompanies" EntityType="dbonlinestoreModel.tblcompany" />
+    <EntitySet Name="tblproducts" EntityType="dbonlinestoreModel.tblproduct" />
+    <AssociationSet Name="FK_tblproducts_Totblproduct" Association="dbonlinestoreModel.FK_tblproducts_Totblproduct">
+      <End Role="tblcategory" EntitySet="tblcategories" />
+      <End Role="tblproduct" EntitySet="tblproducts" />
+    </AssociationSet>
+    <EntitySet Name="tblstocks" EntityType="dbonlinestoreModel.tblstock" />
+    <AssociationSet Name="FK_tblstock_Totblproducts" Association="dbonlinestoreModel.FK_tblstock_Totblproducts">
+      <End Role="tblproduct" EntitySet="tblproducts" />
+      <End Role="tblstock" EntitySet="tblstocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblstock_Totblsupplier" Association="dbonlinestoreModel.FK_tblstock_Totblsupplier">
+      <End Role="tblsupplier" EntitySet="tblsuppliers" />
+      <End Role="tblstock" EntitySet="tblstocks" />
+    </AssociationSet>
+    <EntitySet Name="stock_items" EntityType="dbonlinestoreModel.stock_items" />
+    <EntitySet Name="myinvoices" EntityType="dbonlinestoreModel.myinvoice" />
+  </EntityContainer>
+  <EntityType Name="tblcategory">
+    <Key>
+      <PropertyRef Name="catid" />
+    </Key>
+    <Property Name="catid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="catname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblproducts" Relationship="dbonlinestoreModel.FK_tblproducts_Totblproduct" FromRole="tblcategory" ToRole="tblproduct" />
+  </EntityType>
+  <EntityType Name="tblorder">
+    <Key>
+      <PropertyRef Name="orderid" />
+    </Key>
+    <Property Name="orderid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customername" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="qty" Type="Int32" />
+    <Property Name="total" Type="Int32" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="pid" Type="Int32" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="tbluser">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="userid" Type="Int32" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Roleid" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblsupplier">
+    <Key>
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="sid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="contact" Type="Int32" />
+    <Property Name="adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Int32" />
+    <NavigationProperty Name="tblstocks" Relationship="dbonlinestoreModel.FK_tblstock_Totblsupplier" FromRole="tblsupplier" ToRole="tblstock" />
+  </EntityType>
+  <EntityType Name="tblcompany">
+    <Key>
+      <PropertyRef Name="cid" />
+    </Key>
+    <Property Name="cid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="contact" Type="Int32" />
+    <Property Name="adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cimage" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblproduct">
+    <Key>
+      <PropertyRef Name="pid" />
+    </Key>
+    <Property Name="pid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="qty" Type="Int32" />
+    <Property Name="pimage" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="catid" Type="Int32" />
+    <Property Name="itemcode" Type="Int32" />
+    <NavigationProperty Name="tblcategory" Relationship="dbonlinestoreModel.FK_tblproducts_Totblproduct" FromRole="tblproduct" ToRole="tblcategory" />
+    <NavigationProperty Name="tblstocks" Relationship="dbonlinestoreModel.FK_tblstock_Totblproducts" FromRole="tblproduct" ToRole="tblstock" />
+  </EntityType>
+  <Association Name="FK_tblproducts_Totblproduct">
+    <End Type="dbonlinestoreModel.tblcategory" Role="tblcategory" Multiplicity="0..1" />
+    <End Type="dbonlinestoreModel.tblproduct" Role="tblproduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblcategory">
+        <PropertyRef Name="catid" />
+      </Principal>
+      <Dependent Role="tblproduct">
+        <PropertyRef Name="catid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblstock">
+    <Key>
+      <PropertyRef Name="stockid" />
+    </Key>
+    <Property Name="stockid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pid" Type="Int32" />
+    <Property Name="sid" Type="Int32" />
+    <Property Name="qty" Type="Int32" />
+    <Property Name="expirary_date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="tblproduct" Relationship="dbonlinestoreModel.FK_tblstock_Totblproducts" FromRole="tblstock" ToRole="tblproduct" />
+    <NavigationProperty Name="tblsupplier" Relationship="dbonlinestoreModel.FK_tblstock_Totblsupplier" FromRole="tblstock" ToRole="tblsupplier" />
+  </EntityType>
+  <Association Name="FK_tblstock_Totblproducts">
+    <End Type="dbonlinestoreModel.tblproduct" Role="tblproduct" Multiplicity="0..1" />
+    <End Type="dbonlinestoreModel.tblstock" Role="tblstock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblproduct">
+        <PropertyRef Name="pid" />
+      </Principal>
+      <Dependent Role="tblstock">
+        <PropertyRef Name="pid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblstock_Totblsupplier">
+    <End Type="dbonlinestoreModel.tblsupplier" Role="tblsupplier" Multiplicity="0..1" />
+    <End Type="dbonlinestoreModel.tblstock" Role="tblstock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblsupplier">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="tblstock">
+        <PropertyRef Name="sid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="stock_items">
+    <Key>
+      <PropertyRef Name="stockid" />
+    </Key>
+    <Property Name="stockid" Type="Int32" Nullable="false" />
+    <Property Name="pid" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+  </EntityType>
+  <EntityType Name="myinvoice">
+    <Key>
+      <PropertyRef Name="orderid" />
+    </Key>
+    <Property Name="orderid" Type="Int32" Nullable="false" />
+    <Property Name="catname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="customername" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="qty" Type="Int32" />
+    <Property Name="total" Type="Int32" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+  </EntityType>
+</Schema>

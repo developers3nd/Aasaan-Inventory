@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "~/Views/Shared/_FrontLayout .cshtml";
+
+}
+@model IEnumerable<online_store.Models.tblproduct>
+
+
+
+<section class="banner-bottom py-5">
+    <div class="container py-5">
+        <h3 class="title-wthree mb-lg-5 mb-4 text-center">Shop Now</h3>
+        <!--/row-->
+        <div class="row shop-wthree-info text-center">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 shop-info-grid text-center mt-4">
+                    <div class="product-shoe-info shoe">
+                        @*<a href="@Url.Action("AddtoCart", "Home", new { id = @item.pid })" class="img-prod">*@
+
+                            <div class="men-thumb-item">
+                                <img src="~/Uploads/@item.pimage" class="img-fluid" alt="">
+
+                            </div>
+                            <div class="item-info-product">
+                                <h4>
+                                    <a href="#">@item.name</a>
+                                </h4>
+
+                                <div class="product_price">
+                                    <div class="grid-price">
+                                        <span class="money"><span class="line"></span>RS.@item.price</span>
+                                    </div>
+                                    <div class="grid-price">
+                                        <a href="@Url.Action("Orderbook","Home",new {pid= @item.pid})" class="btn btn-danger">Order Book</a>
+                                    </div>
+                                </div>
+                                <ul class="stars">
+                                    <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
+                                    <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
+                                    <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
+                                    <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
+                                    <li><a href="#"><span class="fa fa-star-o" aria-hidden="true"></span></a></li>
+                                </ul>
+                            </div>
+                            <div class="bottom-area d-flex px-3">
+                                <div class="m-auto d-flex">
+                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <span><i class="ion-ios-menu"></i></span>
+                                    </a>
+                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        <span><i class="ion-ios-cart"></i></span>
+                                    </a>
+                                    <a href="#" class="heart d-flex justify-content-center align-items-center ">
+                                        <span><i class="ion-ios-heart"></i></span>
+                                    </a>
+                                </div>
+                            </div>
+</div>
+                </div>
+
+            }
+        </div>
+
+
+    </div>
+</section>

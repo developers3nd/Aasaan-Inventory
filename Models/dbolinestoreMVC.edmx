@@ -1,0 +1,472 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbonlinestoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblcategories">
+          <Key>
+            <PropertyRef Name="catid" />
+          </Key>
+          <Property Name="catid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="catname" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblcompany">
+          <Key>
+            <PropertyRef Name="cid" />
+          </Key>
+          <Property Name="cid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cname" Type="varchar" MaxLength="50" />
+          <Property Name="contact" Type="int" />
+          <Property Name="adress" Type="varchar" MaxLength="50" />
+          <Property Name="cimage" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="tblorder">
+          <Key>
+            <PropertyRef Name="orderid" />
+          </Key>
+          <Property Name="orderid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customername" Type="varchar" MaxLength="50" />
+          <Property Name="qty" Type="int" />
+          <Property Name="total" Type="int" />
+          <Property Name="status" Type="int" />
+          <Property Name="pid" Type="int" />
+          <Property Name="date" Type="date" />
+        </EntityType>
+        <EntityType Name="tblproducts">
+          <Key>
+            <PropertyRef Name="pid" />
+          </Key>
+          <Property Name="pid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="price" Type="int" />
+          <Property Name="qty" Type="int" />
+          <Property Name="pimage" Type="varchar" MaxLength="1000" />
+          <Property Name="catid" Type="int" />
+          <Property Name="itemcode" Type="int" />
+        </EntityType>
+        <EntityType Name="tblstock">
+          <Key>
+            <PropertyRef Name="stockid" />
+          </Key>
+          <Property Name="stockid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pid" Type="int" />
+          <Property Name="sid" Type="int" />
+          <Property Name="qty" Type="int" />
+          <Property Name="expirary_date" Type="date" />
+        </EntityType>
+        <EntityType Name="tblsupplier">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sname" Type="varchar" MaxLength="50" />
+          <Property Name="contact" Type="int" />
+          <Property Name="adress" Type="varchar" MaxLength="50" />
+          <Property Name="status" Type="int" />
+        </EntityType>
+        <EntityType Name="tbluser">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="Roleid" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'D:\ONLINE STORE WEBAPP\ONLINE STORE\APP_DATA\DBONLINESTORE.MDF.dbo.myinvoice' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="myinvoice">
+          <Key>
+            <PropertyRef Name="orderid" />
+          </Key>
+          <Property Name="orderid" Type="int" Nullable="false" />
+          <Property Name="catname" Type="varchar" MaxLength="50" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="price" Type="int" />
+          <Property Name="customername" Type="varchar" MaxLength="50" />
+          <Property Name="qty" Type="int" />
+          <Property Name="total" Type="int" />
+          <Property Name="date" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'D:\ONLINE STORE WEBAPP\ONLINE STORE\APP_DATA\DBONLINESTORE.MDF.dbo.stock_items' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="stock_items">
+          <Key>
+            <PropertyRef Name="stockid" />
+          </Key>
+          <Property Name="stockid" Type="int" Nullable="false" />
+          <Property Name="pid" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="price" Type="int" />
+        </EntityType>
+        <Association Name="FK_tblproducts_Totblproduct">
+          <End Role="tblcategories" Type="Self.tblcategories" Multiplicity="0..1" />
+          <End Role="tblproducts" Type="Self.tblproducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblcategories">
+              <PropertyRef Name="catid" />
+            </Principal>
+            <Dependent Role="tblproducts">
+              <PropertyRef Name="catid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblstock_Totblproducts">
+          <End Role="tblproducts" Type="Self.tblproducts" Multiplicity="0..1" />
+          <End Role="tblstock" Type="Self.tblstock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblproducts">
+              <PropertyRef Name="pid" />
+            </Principal>
+            <Dependent Role="tblstock">
+              <PropertyRef Name="pid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblstock_Totblsupplier">
+          <End Role="tblsupplier" Type="Self.tblsupplier" Multiplicity="0..1" />
+          <End Role="tblstock" Type="Self.tblstock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblsupplier">
+              <PropertyRef Name="sid" />
+            </Principal>
+            <Dependent Role="tblstock">
+              <PropertyRef Name="sid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbonlinestoreModelStoreContainer">
+          <EntitySet Name="tblcategories" EntityType="Self.tblcategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblcompany" EntityType="Self.tblcompany" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblorder" EntityType="Self.tblorder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblproducts" EntityType="Self.tblproducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblstock" EntityType="Self.tblstock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblsupplier" EntityType="Self.tblsupplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbluser" EntityType="Self.tbluser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="myinvoice" EntityType="Self.myinvoice" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [myinvoice].[orderid] AS [orderid], 
+    [myinvoice].[catname] AS [catname], 
+    [myinvoice].[name] AS [name], 
+    [myinvoice].[price] AS [price], 
+    [myinvoice].[customername] AS [customername], 
+    [myinvoice].[qty] AS [qty], 
+    [myinvoice].[total] AS [total], 
+    [myinvoice].[date] AS [date]
+    FROM [dbo].[myinvoice] AS [myinvoice]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="stock_items" EntityType="Self.stock_items" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [stock_items].[stockid] AS [stockid], 
+    [stock_items].[pid] AS [pid], 
+    [stock_items].[name] AS [name], 
+    [stock_items].[price] AS [price]
+    FROM [dbo].[stock_items] AS [stock_items]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_tblproducts_Totblproduct" Association="Self.FK_tblproducts_Totblproduct">
+            <End Role="tblcategories" EntitySet="tblcategories" />
+            <End Role="tblproducts" EntitySet="tblproducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblstock_Totblproducts" Association="Self.FK_tblstock_Totblproducts">
+            <End Role="tblproducts" EntitySet="tblproducts" />
+            <End Role="tblstock" EntitySet="tblstock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblstock_Totblsupplier" Association="Self.FK_tblstock_Totblsupplier">
+            <End Role="tblsupplier" EntitySet="tblsupplier" />
+            <End Role="tblstock" EntitySet="tblstock" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbonlinestoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbonlinestoreEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblcategories" EntityType="dbonlinestoreModel.tblcategory" />
+          <EntitySet Name="tblorders" EntityType="dbonlinestoreModel.tblorder" />
+          <EntitySet Name="tblusers" EntityType="dbonlinestoreModel.tbluser" />
+          <EntitySet Name="tblsuppliers" EntityType="dbonlinestoreModel.tblsupplier" />
+          <EntitySet Name="tblcompanies" EntityType="dbonlinestoreModel.tblcompany" />
+          <EntitySet Name="tblproducts" EntityType="dbonlinestoreModel.tblproduct" />
+          <AssociationSet Name="FK_tblproducts_Totblproduct" Association="dbonlinestoreModel.FK_tblproducts_Totblproduct">
+            <End Role="tblcategory" EntitySet="tblcategories" />
+            <End Role="tblproduct" EntitySet="tblproducts" />
+          </AssociationSet>
+          <EntitySet Name="tblstocks" EntityType="dbonlinestoreModel.tblstock" />
+          <AssociationSet Name="FK_tblstock_Totblproducts" Association="dbonlinestoreModel.FK_tblstock_Totblproducts">
+            <End Role="tblproduct" EntitySet="tblproducts" />
+            <End Role="tblstock" EntitySet="tblstocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblstock_Totblsupplier" Association="dbonlinestoreModel.FK_tblstock_Totblsupplier">
+            <End Role="tblsupplier" EntitySet="tblsuppliers" />
+            <End Role="tblstock" EntitySet="tblstocks" />
+          </AssociationSet>
+          <EntitySet Name="stock_items" EntityType="dbonlinestoreModel.stock_items" />
+          <EntitySet Name="myinvoices" EntityType="dbonlinestoreModel.myinvoice" />
+        </EntityContainer>
+        <EntityType Name="tblcategory">
+          <Key>
+            <PropertyRef Name="catid" />
+          </Key>
+          <Property Name="catid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="catname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblproducts" Relationship="dbonlinestoreModel.FK_tblproducts_Totblproduct" FromRole="tblcategory" ToRole="tblproduct" />
+        </EntityType>
+        <EntityType Name="tblorder">
+          <Key>
+            <PropertyRef Name="orderid" />
+          </Key>
+          <Property Name="orderid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customername" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="qty" Type="Int32" />
+          <Property Name="total" Type="Int32" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="pid" Type="Int32" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tbluser">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Roleid" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblsupplier">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contact" Type="Int32" />
+          <Property Name="adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Int32" />
+          <NavigationProperty Name="tblstocks" Relationship="dbonlinestoreModel.FK_tblstock_Totblsupplier" FromRole="tblsupplier" ToRole="tblstock" />
+        </EntityType>
+        <EntityType Name="tblcompany">
+          <Key>
+            <PropertyRef Name="cid" />
+          </Key>
+          <Property Name="cid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contact" Type="Int32" />
+          <Property Name="adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cimage" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblproduct">
+          <Key>
+            <PropertyRef Name="pid" />
+          </Key>
+          <Property Name="pid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="qty" Type="Int32" />
+          <Property Name="pimage" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="catid" Type="Int32" />
+          <Property Name="itemcode" Type="Int32" />
+          <NavigationProperty Name="tblcategory" Relationship="dbonlinestoreModel.FK_tblproducts_Totblproduct" FromRole="tblproduct" ToRole="tblcategory" />
+          <NavigationProperty Name="tblstocks" Relationship="dbonlinestoreModel.FK_tblstock_Totblproducts" FromRole="tblproduct" ToRole="tblstock" />
+        </EntityType>
+        <Association Name="FK_tblproducts_Totblproduct">
+          <End Type="dbonlinestoreModel.tblcategory" Role="tblcategory" Multiplicity="0..1" />
+          <End Type="dbonlinestoreModel.tblproduct" Role="tblproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblcategory">
+              <PropertyRef Name="catid" />
+            </Principal>
+            <Dependent Role="tblproduct">
+              <PropertyRef Name="catid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblstock">
+          <Key>
+            <PropertyRef Name="stockid" />
+          </Key>
+          <Property Name="stockid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pid" Type="Int32" />
+          <Property Name="sid" Type="Int32" />
+          <Property Name="qty" Type="Int32" />
+          <Property Name="expirary_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tblproduct" Relationship="dbonlinestoreModel.FK_tblstock_Totblproducts" FromRole="tblstock" ToRole="tblproduct" />
+          <NavigationProperty Name="tblsupplier" Relationship="dbonlinestoreModel.FK_tblstock_Totblsupplier" FromRole="tblstock" ToRole="tblsupplier" />
+        </EntityType>
+        <Association Name="FK_tblstock_Totblproducts">
+          <End Type="dbonlinestoreModel.tblproduct" Role="tblproduct" Multiplicity="0..1" />
+          <End Type="dbonlinestoreModel.tblstock" Role="tblstock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblproduct">
+              <PropertyRef Name="pid" />
+            </Principal>
+            <Dependent Role="tblstock">
+              <PropertyRef Name="pid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblstock_Totblsupplier">
+          <End Type="dbonlinestoreModel.tblsupplier" Role="tblsupplier" Multiplicity="0..1" />
+          <End Type="dbonlinestoreModel.tblstock" Role="tblstock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblsupplier">
+              <PropertyRef Name="sid" />
+            </Principal>
+            <Dependent Role="tblstock">
+              <PropertyRef Name="sid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="stock_items">
+          <Key>
+            <PropertyRef Name="stockid" />
+          </Key>
+          <Property Name="stockid" Type="Int32" Nullable="false" />
+          <Property Name="pid" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Int32" />
+        </EntityType>
+        <EntityType Name="myinvoice">
+          <Key>
+            <PropertyRef Name="orderid" />
+          </Key>
+          <Property Name="orderid" Type="Int32" Nullable="false" />
+          <Property Name="catname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="customername" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="qty" Type="Int32" />
+          <Property Name="total" Type="Int32" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbonlinestoreModelStoreContainer" CdmEntityContainer="dbonlinestoreEntities">
+          <EntitySetMapping Name="tblcategories">
+            <EntityTypeMapping TypeName="dbonlinestoreModel.tblcategory">
+              <MappingFragment StoreEntitySet="tblcategories">
+                <ScalarProperty Name="catname" ColumnName="catname" />
+                <ScalarProperty Name="catid" ColumnName="catid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblorders">
+            <EntityTypeMapping TypeName="dbonlinestoreModel.tblorder">
+              <MappingFragment StoreEntitySet="tblorder">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="customername" ColumnName="customername" />
+                <ScalarProperty Name="orderid" ColumnName="orderid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblusers">
+            <EntityTypeMapping TypeName="dbonlinestoreModel.tbluser">
+              <MappingFragment StoreEntitySet="tbluser">
+                <ScalarProperty Name="Roleid" ColumnName="Roleid" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblsuppliers">
+            <EntityTypeMapping TypeName="dbonlinestoreModel.tblsupplier">
+              <MappingFragment StoreEntitySet="tblsupplier">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="contact" ColumnName="contact" />
+                <ScalarProperty Name="sname" ColumnName="sname" />
+                <ScalarProperty Name="sid" ColumnName="sid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblcompanies">
+            <EntityTypeMapping TypeName="dbonlinestoreModel.tblcompany">
+              <MappingFragment StoreEntitySet="tblcompany">
+                <ScalarProperty Name="cimage" ColumnName="cimage" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="contact" ColumnName="contact" />
+                <ScalarProperty Name="cname" ColumnName="cname" />
+                <ScalarProperty Name="cid" ColumnName="cid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblproducts">
+            <EntityTypeMapping TypeName="dbonlinestoreModel.tblproduct">
+              <MappingFragment StoreEntitySet="tblproducts">
+                <ScalarProperty Name="itemcode" ColumnName="itemcode" />
+                <ScalarProperty Name="catid" ColumnName="catid" />
+                <ScalarProperty Name="pimage" ColumnName="pimage" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="pid" ColumnName="pid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblstocks">
+            <EntityTypeMapping TypeName="dbonlinestoreModel.tblstock">
+              <MappingFragment StoreEntitySet="tblstock">
+                <ScalarProperty Name="expirary_date" ColumnName="expirary_date" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="sid" ColumnName="sid" />
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="stockid" ColumnName="stockid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stock_items">
+            <EntityTypeMapping TypeName="dbonlinestoreModel.stock_items">
+              <MappingFragment StoreEntitySet="stock_items">
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="stockid" ColumnName="stockid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="myinvoices">
+            <EntityTypeMapping TypeName="dbonlinestoreModel.myinvoice">
+              <MappingFragment StoreEntitySet="myinvoice">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="customername" ColumnName="customername" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="catname" ColumnName="catname" />
+                <ScalarProperty Name="orderid" ColumnName="orderid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

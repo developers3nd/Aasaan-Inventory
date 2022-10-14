@@ -1,0 +1,58 @@
+﻿@model IEnumerable<online_store.Models.myinvoice>
+
+@{
+    ViewBag.Title = "ViewOrder";
+}
+
+<h2>ViewOrder</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.customername)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total)
+        </th>
+       
+        <th>
+            Products
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>Action </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.customername)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.qty)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.total)
+    </td>
+   
+    <td>
+        @Html.DisplayFor(modelItem => item.name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.date)
+    </td>
+
+    <td>
+    <a href="@Url.Action("Invoice","Order",new { orderid  = @item.orderid})" class="btn btn-success"> Invoice</a>
+    </td>
+</tr>
+}
+
+</table>

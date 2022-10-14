@@ -1,0 +1,109 @@
+﻿@model online_store.Models.tblorder
+
+@{
+    ViewBag.Title = "Orderbook";
+
+    DateTime date = DateTime.Now;
+}
+
+<script src="~/plugins/jquery/jquery.min.js"></script>
+
+
+<h2>Counter Sale</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Products </label>
+
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.pid, ViewBag.proList as SelectList, "--- select product ---", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.pid)
+        </div>
+    </div>
+
+    @*@Html.DropDownListFor(m => m.pid, new SelectList(""), "--- SELECT CITY ---", new { @class = "form-control col-lg-4" })*@
+
+
+
+    <div id="price" style="font-size:24pt;">
+
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label col-md-2">Qty </label>
+        <div class="col-md-10">
+     
+            <input type="number" id="qty" name="qty" class="form-control" required />
+            @Html.ValidationMessageFor(model => model.qty, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Total </label>
+        <div class="col-md-10">
+           
+            <input type="number" id="total" name="total" class="form-control" required />
+            @Html.ValidationMessageFor(model => model.total, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    @*<div class="form-group">
+            @if (ViewBag.proList != null)
+            {
+                @Html.DropDownListFor(m => m.pid, new SelectList(""), "--- SELECT Price ---", new { @class = "form-control col-lg-4" })
+            }
+
+
+        </div>*@
+
+
+
+
+    <input type="hidden" value="WALK-IN" name="customername" />
+
+    <input type="hidden" value="@date" name="date" />
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Sale" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+
+
+ @*<select id="price_data"></select>*@
+
+<script>
+    $(document).ready(function () {
+        $("#pid").change(function () {
+            $.get("/Order/GetItemPrice", { pid: $("#pid").val() }, function (data) {
+                $("#price").empty();
+                $.each(data, function (key,val) {
+                    $("#price").append(val.price);
+                })
+
+            });
+        })
+    })
+
+    $("#qty").keyup(function () {
+        var qty = $(this).val();
+
+        var price = $("#price").text();
+
+        var total = parseInt(qty) * parseInt(price);
+
+        $("#total").val(total);
+
+    })
+</script>

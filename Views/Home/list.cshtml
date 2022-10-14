@@ -1,0 +1,57 @@
+﻿@model IEnumerable<online_store.Models.tblproduct>
+
+@{
+    ViewBag.Title = "list";
+}
+
+<h2>list</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pimage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblcategory.catname)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.qty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pimage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblcategory.catname)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.pid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.pid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.pid })
+        </td>
+    </tr>
+}
+
+</table>
